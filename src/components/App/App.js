@@ -4,6 +4,7 @@ import Header from '../Header/Header'
 import Form from '../Form/Form'
 import Stats from '../Stats/Stats'
 import Trips from '../Trips/Trips'
+import { getTravelerData, getSingleTraveler, getTripData, getDestinationData } from '../../apiCalls'
 
 class App extends Component {
   constructor() {
