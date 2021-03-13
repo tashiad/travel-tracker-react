@@ -18,12 +18,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    getTripData()
-    .then(data => this.setState({ allTrips: data.trips }))
-    .catch(error => console.log(error))
-
-    getDestinationData()
-    .then(data => this.setState({ allDestinations: data.destinations }))
+    Promise.all([ getTripData(), getDestinationData() ])
+    .then(values => {
+      this.setState({ allTrips: values[0].trips })
+      this.setState({ allDestinations: values[1].destinations })
+    })
     .then(() => this.getTravelerTrips())
     .catch(error => console.log(error))
   }
