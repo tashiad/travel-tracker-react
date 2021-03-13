@@ -1,9 +1,23 @@
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
 
-function App() {
-  return (
-    <h1>Travel Tracker React Refactor</h1>
-  );
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      user: {}
+    }
+  }
+
+  componentDidMount() {
+
+  }
+
+  render() {
+    return (
+      <h1>Travel Tracker React Refactor</h1>
+    )
+  }
 }
 
-export default App;
+export default App
