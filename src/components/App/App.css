@@ -1,38 +1,103 @@
-.App {
-  text-align: center;
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0 0 7% 0;
+  font-size: 16px;
+  display: grid;
+  /* grid-template: auto 1fr / auto 1fr; */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+h1 {
+  font-size: 2.2em;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+h2 {
+  font-size: 1.8em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+h3 {
+  font-size: 1.5em;
+}
+
+p {
+  font-size: 1em;
+  margin: 2px;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 8fr 1fr;
+}
+
+.sidebar {
+  border-right: 1px solid lightgray;
+  padding: 0 10%;
+}
+
+.icon {
+  height: 125px;
+  width: 150px;
+  margin-top: 5%;
+}
+
+.button {
+  height: 40px;
+  margin: 8% 0;
+  padding: 0 3%;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #90A9CA;
+  transition: .5s ease;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.error-message {
+  color: red;
+  font-style: italic;
+}
+
+.success {
+  border: 2px solid green;
+}
+
+.failure {
+  border: 2px solid red;
+}
+
+@media screen and (max-width: 1400px) {
+  body {
+    margin: 0 0 15% 0;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media screen and (max-width: 1100px) {
+  main {
+    grid-template-columns: minmax(150px, 30%) 1fr;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  h1 {
+    text-align: center;
+    padding: 0 3%;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar {
+    border-right: none;
+  }
+
+  .icon {
+    display: none;
   }
 }

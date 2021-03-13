@@ -1,0 +1,47 @@
+header {
+  grid-column: 1 / 4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url("../../images/plane-banner.jpeg");
+  background-size: cover;
+  background-position: center;
+  height: 150px;
+  padding: 0 2%;
+}
+
+header h2 {
+  color: white;
+}
+
+.fa-plane {
+  color: white;
+}
+
+@media screen and (max-width: 900px) {
+  header {
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 175px;
+  }
+
+  header h2 {
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  header {
+    height: 230px;
+  }
+
+  header h1 {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  header {
+    height: 300px;
+  }
+}
