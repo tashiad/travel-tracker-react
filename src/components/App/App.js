@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import './App.css'
+import Header from '../Header/Header'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      user: {}
+      user: { id: 1, name: 'Ham Leadbeater', travelerType: 'relaxer' }
     }
   }
 
@@ -15,7 +16,9 @@ class App extends Component {
 
   render() {
     return (
-      <h1>Travel Tracker React Refactor</h1>
+      <>
+        <Header name={this.state.user.name} />
+      </>
     )
   }
 }
