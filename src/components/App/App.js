@@ -3,9 +3,8 @@ import './App.css'
 import icon from '../../images/undraw_travel_mode_7sf4.svg'
 import Header from '../Header/Header'
 import Form from '../Form/Form'
-import Stats from '../Stats/Stats'
 import Trips from '../Trips/Trips'
-import { getTripData, getDestinationData } from '../../apiCalls'
+import { fetchTripData, fetchDestinationData, postTrip } from '../../apiCalls'
 
 class App extends Component {
   constructor() {
@@ -19,7 +18,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    Promise.all([ getTripData(), getDestinationData() ])
+    this.getTrips()
+  }
+
+  getTrips = () => {
+    Promise.all([ fetchTripData(), fetchDestinationData() ])
     .then(values => {
       this.setState({ allTrips: values[0].trips })
       this.setState({ allDestinations: values[1].destinations })
@@ -50,6 +53,12 @@ class App extends Component {
     this.setState({ travelerTrips: matchedDestinations })
   }
 
+  addTrip = (trip) => {
+    postTrip(trip)
+    .then(() => this.getTrips())
+    .catch(error => console.log(error))
+  }
+
   render() {
     return (
       <>
@@ -57,8 +66,10 @@ class App extends Component {
         <main>
           <aside className="sidebar">
             <img className="icon" src={icon} alt="woman traveling with a suitcase" />
-            <Form />
-            <Stats />
+            <Form
+              allDestinations={this.state.allDestinations}
+              addTrip={this.addTrip}
+            />
           </aside>
           <Trips travelerTrips={this.state.travelerTrips} />
         </main>
