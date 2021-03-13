@@ -10,7 +10,11 @@ header {
   padding: 0 2%;
 }
 
-header h1, h2, .fa-plane {
+header h2 {
+  color: white;
+}
+
+.fa-plane {
   color: white;
 }
 
