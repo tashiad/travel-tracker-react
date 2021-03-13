@@ -12,8 +12,8 @@ const Trips = ({ travelerTrips }) => {
         duration={trip.duration}
         travelers={trip.travelers}
         destination={trip.destination.destination}
-        // alt={trip.destination.alt}
-        // image={this.destination.image}
+        alt={trip.destination.alt}
+        image={trip.destination.image}
         flights={trip.destination.estimatedFlightCostPerPerson}
         lodging={trip.destination.estimatedLodgingCostPerDay}
       />
@@ -24,8 +24,8 @@ const Trips = ({ travelerTrips }) => {
     <section className="all-trips">
       <h2>Your Trips</h2>
       <button type="button" name="button" className="button button-filter" id="no-trip-filters">All Trips</button>
-      <button type="button" name="button" className="button button-filter" id="approved-trips">Approved Trips</button>
-      <button type="button" name="button" className="button button-filter" id="pending-trips">Pending Trips</button>
+      <button type="button" name="button" className="button button-filter" id="approved-trips">Upcoming Trips</button>
+      <button type="button" name="button" className="button button-filter" id="pending-trips">Past Trips</button>
       <section className="card-grid">
         { tripCards }
       </section>
