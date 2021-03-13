@@ -1,0 +1,31 @@
+.trip-stats {
+  border-right: 1px solid lightgray;
+  padding: 0 10%;
+  color: black;
+  padding: 8% 5%;
+  margin-top: 15%;
+  border-radius: 2px;
+  background: #90A9CA;
+}
+
+.trip-stats h3 {
+  margin-top: 0;
+}
+
+.stat {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-top: 10%;
+}
+
+@media screen and (max-width: 610px) {
+  .trip-stats .stat {
+    font-size: 1.2em;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .trip-stats {
+    margin: 3% 0;
+  }
+}

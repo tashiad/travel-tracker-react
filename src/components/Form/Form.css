@@ -1,0 +1,48 @@
+.trip-form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin: 5% 0 2% 0;
+  font-weight: bold;
+}
+
+input,
+#trip-destination {
+  height: 30px;
+}
+
+.button-quote {
+  border: none;
+  background-color: #585A89;
+  border-radius: 2px;
+  font-size: 1em;
+  font-weight: bold;
+  color: white;
+}
+
+.button-submit {
+  border: none;
+  background-color: #585A89;
+  border-radius: 2px;
+  font-size: 1em;
+  font-weight: bold;
+  color: white;
+  background-color: #00B0FE;
+}
+
+#trip-request-message {
+  margin-bottom: 10%;
+}
+
+@media screen and (max-width: 425px) {
+  .sign-in-form {
+    flex-direction: column;
+    margin-bottom: 5%;
+  }
+
+  .button-signin {
+    height: 30px;
+  }
+}
