@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
+import icon from '../../images/undraw_travel_mode_7sf4.svg'
 import Header from '../Header/Header'
 import Form from '../Form/Form'
 import Stats from '../Stats/Stats'
@@ -55,7 +56,7 @@ class App extends Component {
         <Header name={this.state.currentTraveler.name} />
         <main>
           <aside className="sidebar">
-            <img className="icon" src="../../images/undraw_travel_mode_7sf4.svg" alt="woman traveling with a suitcase" />
+            <img className="icon" src={icon} alt="woman traveling with a suitcase" />
             <Form />
             <Stats />
           </aside>
