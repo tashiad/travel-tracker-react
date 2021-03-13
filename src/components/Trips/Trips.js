@@ -3,7 +3,11 @@ import './Trips.css'
 import Trip from '../Trip/Trip'
 
 const Trips = ({ travelerTrips }) => {
-  const tripCards = travelerTrips.map(trip => {
+  const sortedTrips = travelerTrips.sort((a, b) => {
+    return new Date(b.date) - new Date(a.date)
+  })
+
+  const tripCards = sortedTrips.map(trip => {
     return (
       <Trip
         id={trip.id}
