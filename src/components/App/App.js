@@ -10,7 +10,8 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      // TO DO: with more time, I'd create a login form to bring in different users from the travelers endpoint
+      // TO DO: with more time, I'd create a login form
+      // to bring in different users from the travelers endpoint
       currentTraveler: {},
       allTrips: [],
       allDestinations: [],
@@ -62,6 +63,16 @@ class App extends Component {
     .catch(error => console.log(error))
   }
 
+  removeTrip = (id) => {
+    const filteredTrips = this.state.travelerTrips.filter(trip => trip.id !== id)
+
+    this.setState({ travelerTrips: filteredTrips })
+
+    // TO DO: 'DELETE' endpoint doesn't seem to be working (even in Postman).
+    // Just removing trip from UI until refresh for now.
+    // deleteTrip(id)
+  }
+
   render() {
     return (
       <>
@@ -76,7 +87,10 @@ class App extends Component {
               addTrip={this.addTrip}
             />
           </aside>
-          <Trips travelerTrips={this.state.travelerTrips} />
+          <Trips
+            travelerTrips={this.state.travelerTrips}
+            removeTrip={this.removeTrip}
+          />
         </main>
       </>
     )

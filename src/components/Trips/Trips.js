@@ -2,7 +2,7 @@ import React from 'react'
 import './Trips.css'
 import Trip from '../Trip/Trip'
 
-const Trips = ({ travelerTrips }) => {
+const Trips = ({ travelerTrips, removeTrip }) => {
   const sortedTrips = travelerTrips.sort((a, b) => {
     return new Date(b.date) - new Date(a.date)
   })
@@ -20,6 +20,7 @@ const Trips = ({ travelerTrips }) => {
         image={trip.destination.image}
         flights={trip.destination.estimatedFlightCostPerPerson}
         lodging={trip.destination.estimatedLodgingCostPerDay}
+        removeTrip={removeTrip}
       />
     )
   })
