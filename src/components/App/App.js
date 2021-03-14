@@ -27,20 +27,13 @@ class App extends Component {
       this.setState({ allTrips: values[0].trips })
       this.setState({ allDestinations: values[1].destinations })
     })
+    .then(() => this.matchDestinations())
     .then(() => this.getTravelerTrips())
     .catch(error => console.log(error))
   }
 
-  getTravelerTrips = () => {
-    const filteredTrips = this.state.allTrips.filter(trip => {
-      return trip.userID === this.state.currentTraveler.id
-    })
-
-    this.matchDestinations(filteredTrips)
-  }
-
-  matchDestinations = (filteredTrips) => {
-    const matchedDestinations = filteredTrips.map(trip => {
+  matchDestinations = () => {
+    const matchedDestinations = this.state.allTrips.map(trip => {
       const matchedDestination = this.state.allDestinations.find(dest => {
         return dest.id === trip.destinationID
       })
@@ -50,7 +43,15 @@ class App extends Component {
       return trip
     })
 
-    this.setState({ travelerTrips: matchedDestinations })
+    this.setState({ allTrips: matchedDestinations })
+  }
+
+  getTravelerTrips = () => {
+    const filteredTrips = this.state.allTrips.filter(trip => {
+      return trip.userID === this.state.currentTraveler.id
+    })
+
+    this.setState({ travelerTrips: filteredTrips })
   }
 
   addTrip = (trip) => {
@@ -67,6 +68,8 @@ class App extends Component {
           <aside className="sidebar">
             <img className="icon" src={icon} alt="woman traveling with a suitcase" />
             <Form
+              currentTraveler={this.state.currentTraveler}
+              allTrips={this.state.allTrips}
               allDestinations={this.state.allDestinations}
               addTrip={this.addTrip}
             />
