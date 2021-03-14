@@ -21,3 +21,11 @@ export const postTrip = (trip) => {
   })
   .then(response => response.json())
 }
+
+// export const deleteTrip = (id) => {
+//   return fetch(`https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips/${id}`, {
+//     method: 'DELETE',
+//     headers: {'Content-Type': 'application/json'}
+//   })
+//   .then(response => response.json())
+// }
