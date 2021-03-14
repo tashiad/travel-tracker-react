@@ -16,12 +16,8 @@
   margin-bottom: 10%;
 }
 
-.card-destination {
+.card h3 {
   height: 12%;
-}
-
-.pending {
-  color: red;
 }
 
 .button-remove {
