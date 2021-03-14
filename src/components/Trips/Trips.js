@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './Trips.css'
 import Trip from '../Trip/Trip'
 
@@ -34,6 +35,13 @@ const Trips = ({ travelerTrips, removeTrip, error, isLoading }) => {
       </section>
     </section>
   )
+}
+
+Trips.propTypes = {
+  travelerTrips: PropTypes.array,
+  removeTrip: PropTypes.func,
+  error: PropTypes.string,
+  isLoading: PropTypes.bool
 }
 
 export default Trips
