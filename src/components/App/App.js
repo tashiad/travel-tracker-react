@@ -22,11 +22,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // const rand = Math.floor(Math.random() * 50) + 1
+    const rand = Math.floor(Math.random() * 50) + 2
 
     this.setState({ isLoading: true })
 
-    Promise.all([ getSingleTraveler(1), fetchTripData(), fetchDestinationData() ])
+    Promise.all([ getSingleTraveler(rand), fetchTripData(), fetchDestinationData() ])
     .then(values => {
       this.setState({ currentTraveler: values[0] })
       this.setState({ allTrips: values[1].trips })
