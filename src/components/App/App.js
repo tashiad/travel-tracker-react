@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import icon from '../../images/undraw_travel_mode_7sf4.svg'
+import rand from '../../random-number'
 import Header from '../Header/Header'
 import Form from '../Form/Form'
 import Trips from '../Trips/Trips'
@@ -22,8 +23,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const rand = Math.floor(Math.random() * 50) + 1
-
     this.setState({ isLoading: true })
 
     Promise.all([ getSingleTraveler(rand), fetchTripData(), fetchDestinationData() ])
