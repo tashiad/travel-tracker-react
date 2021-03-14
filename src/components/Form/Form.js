@@ -82,7 +82,8 @@ class Form extends Component {
   }
 
   clearInputs = () => {
-    this.setState({ date: '', travelers: '', duration: '', destination: '', quote: '', added: false })
+    this.setState({ date: '', travelers: '', duration: '', destination: '', quote: '' })
+    setTimeout(() => this.setState({ added: false }), 3000)
   }
 
   render() {
@@ -128,7 +129,7 @@ class Form extends Component {
             onChange={this.handleChange}
             required
           >
-          <option value="" selected disabled></option>
+          <option value="" disabled>Select a destination</option>
           {this.populateDestinations()}
           </select>
 
@@ -141,7 +142,7 @@ class Form extends Component {
           {this.state.quote &&
             <button type="button" className="button button-submit" id="button-submit" onClick={this.createTrip}>Add Trip</button>
           }
-          {this.state.added && <p className="hidden" id="trip-request-message"><em>Trip added. Bon voyage!</em></p>}
+          {this.state.added && <p id="trip-request-message"><em>Trip added. Bon voyage!</em></p>}
         </form>
       </>
     )

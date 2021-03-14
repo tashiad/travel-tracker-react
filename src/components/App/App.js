@@ -11,7 +11,7 @@ class App extends Component {
     super()
     this.state = {
       // TO DO: with more time, I'd create a login form
-      // to bring in different users from the travelers endpoint
+      // and bring in different users from the travelers endpoint
       currentTraveler: {},
       allTrips: [],
       allDestinations: [],
@@ -69,7 +69,7 @@ class App extends Component {
     this.setState({ travelerTrips: filteredTrips })
 
     // TO DO: 'DELETE' endpoint doesn't seem to be working (even in Postman).
-    // Just removing trip from UI until refresh for now.
+    // Current workaround is to just remove trip from UI until refresh for now.
     // deleteTrip(id)
   }
 
