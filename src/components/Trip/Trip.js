@@ -1,7 +1,7 @@
 import React from 'react'
 import './Trip.css'
 
-const Trip = ({ id, date, duration, travelers, destination, alt, image, flights, lodging }) => {
+const Trip = ({ id, date, duration, travelers, destination, alt, image, flights, lodging, removeTrip }) => {
   const formatDate = () => {
     const nums = date.split('/')
     const formatted = `${nums[1]}/${nums[2]}/${nums[0]}`
@@ -22,6 +22,7 @@ const Trip = ({ id, date, duration, travelers, destination, alt, image, flights,
 
   return (
     <article className="card">
+      <button onClick={() => removeTrip(id)}>X</button>
       <h3 className="card-destination">{destination}</h3>
       <img className="card-image" src={image} alt={alt} />
       <p className="card-travelers"><strong>Travelers:</strong> {travelers}</p>
