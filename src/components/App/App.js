@@ -65,7 +65,7 @@ class App extends Component {
     .then(data => this.setState({ allTrips: [data.newResource, ...this.state.allTrips] }))
     .then(() => this.matchDestinations())
     .then(() => this.getTravelerTrips())
-    .catch(error => this.setState({ error: 'Something went wrong. Please refresh the page or try again later.' }))
+    .catch(error => this.setState({ error: 'Unable to load trips. Please refresh the page or try again later.' }))
   }
 
   removeTrip = (id) => {

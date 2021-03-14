@@ -112,18 +112,32 @@ describe('Travel Tracker Homepage', () => {
 
 describe('Server Sad Paths', () => {
 
-  it.skip('Should display an error message when the server returns a 400 error', () => {
-  cy
-    .intercept('http://localhost:3001/api/v1/urls', {statusCode: 404})
-    .visit('http://localhost:3000')
-    .get('section').should('have.text', 'Something went wrong with the server. Please refresh the page or try again later')
-})
-
-  it.skip('Should display an error message when the server returns a 500 error', () => {
+  it('Should display an error message when the server returns a 400 error', () => {
     cy
-      .intercept('http://localhost:3001/api/v1/urls', {statusCode: 500})
+      .intercept('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips', {statusCode: 404})
       .visit('http://localhost:3000')
-      .get('section').should('have.text', 'Something went wrong with the server. Please refresh the page or try again later')
+      .get('.all-trips').should('contain', 'Unable to load trips. Please refresh the page or try again later.')
+  })
+
+  it('Should display an error message when the server returns a 500 error', () => {
+    cy
+      .intercept('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips', {statusCode: 500})
+      .visit('http://localhost:3000')
+      .get('section').should('contain', 'Unable to load trips. Please refresh the page or try again later.')
+  })
+
+  it('Should display an error message when the server returns a 400 error', () => {
+    cy
+      .intercept('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/destinations/destinations', {statusCode: 404})
+      .visit('http://localhost:3000')
+      .get('.all-trips').should('contain', 'Unable to load trips. Please refresh the page or try again later.')
+  })
+
+  it('Should display an error message when the server returns a 500 error', () => {
+    cy
+      .intercept('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/destinations/destinations', {statusCode: 500})
+      .visit('http://localhost:3000')
+      .get('section').should('contain', 'Unable to load trips. Please refresh the page or try again later.')
   })
 
 })
