@@ -82,7 +82,15 @@ class Form extends Component {
   }
 
   clearInputs = () => {
-    this.setState({ date: '', travelers: '', duration: '', destination: '', quote: '', added: false })
+    this.setState({
+      date: '',
+      travelers: '',
+      duration: '',
+      destination: '',
+      quote: ''
+    })
+
+    setTimeout(() => this.setState({ added: false }), 3000)
   }
 
   render() {
@@ -123,25 +131,54 @@ class Form extends Component {
 
           <label htmlFor="destination">Destination:</label>
           <select
+            className="trip-destination"
             name="destination"
             value={this.state.destination}
             onChange={this.handleChange}
             required
           >
-          <option value="" selected disabled></option>
-          {this.populateDestinations()}
+            <option value="" disabled>Select a destination</option>
+            {this.populateDestinations()}
           </select>
 
           {!this.checkDateInput() || !this.state.travelers || !this.state.duration || !this.state.destination ?
-            <button type="button" name="button" className="button button-quote disabled" disabled>Get a Quote</button>
+            <button
+              type="button"
+              name="button"
+              className="button button-form button-quote disabled"
+              disabled
+            >
+            Get a Quote
+            </button>
             :
-            <button type="button" name="button" className="button button-quote" onClick={this.getQuote}>Get a Quote</button>
+            <button
+              type="button"
+              name="button"
+              className="button button-form button-quote"
+              onClick={this.getQuote}
+            >
+            Get a Quote
+            </button>
           }
-          {this.state.quote && <p id="trip-cost"><strong>Estimated trip cost:</strong> ${this.state.quote}</p>}
+
           {this.state.quote &&
-            <button type="button" className="button button-submit" id="button-submit" onClick={this.createTrip}>Add Trip</button>
+            <p><strong>Estimated trip cost:</strong> ${this.state.quote}</p>
           }
-          {this.state.added && <p className="hidden" id="trip-request-message"><em>Trip added. Bon voyage!</em></p>}
+
+          {this.state.quote &&
+            <button
+              type="button"
+              className="button button-form button-submit"
+              onClick={this.createTrip}
+            >
+            Add Trip
+            </button>
+          }
+
+          {this.state.added &&
+            <p className="trip-request-message">Trip added. Bon voyage!</p>
+          }
+
         </form>
       </>
     )

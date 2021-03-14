@@ -2,7 +2,6 @@ import React from 'react'
 import './Header.css'
 
 const Header = ({ name }) => {
-
   const getFirstName = () => {
     const firstName = name.split(' ')[0]
     return firstName
