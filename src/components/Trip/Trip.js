@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './Trip.css'
 
 const Trip = ({id, date, duration, travelers, destination, alt, image, flights, lodging, removeTrip }) => {
@@ -33,6 +34,19 @@ const Trip = ({id, date, duration, travelers, destination, alt, image, flights, 
       <p><strong>Total Trip Cost:</strong> ${calculateCost()}</p>
     </article>
   )
+}
+
+Trip.propTypes = {
+  id: PropTypes.number,
+  date: PropTypes.string,
+  duration: PropTypes.number,
+  travelers: PropTypes.number,
+  destination: PropTypes.string,
+  alt: PropTypes.string,
+  image: PropTypes.string,
+  flights: PropTypes.number,
+  lodging: PropTypes.number,
+  removeTrip: PropTypes.func
 }
 
 export default Trip
