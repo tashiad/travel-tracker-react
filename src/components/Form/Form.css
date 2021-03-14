@@ -36,6 +36,10 @@ input,
   margin-bottom: 10%;
 }
 
+.disabled {
+  cursor: not-allowed;
+}
+
 @media screen and (max-width: 425px) {
   .sign-in-form {
     flex-direction: column;

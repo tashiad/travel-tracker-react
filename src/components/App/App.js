@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import './App.css'
+import icon from '../../images/undraw_travel_mode_7sf4.svg'
 import Header from '../Header/Header'
 import Form from '../Form/Form'
-import Stats from '../Stats/Stats'
 import Trips from '../Trips/Trips'
-import { getTripData, getDestinationData } from '../../apiCalls'
+import { getSingleTraveler, fetchTripData, fetchDestinationData, postTrip } from '../../apiCalls'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      currentTraveler: { id: 7, name: 'Emmet Sandham', travelerType: 'relaxer' },
+      // TO DO: with more time, I'd create a login form to bring in different users from the travelers endpoint
+      currentTraveler: {},
       allTrips: [],
       allDestinations: [],
       travelerTrips: []
@@ -18,25 +19,21 @@ class App extends Component {
   }
 
   componentDidMount() {
-    Promise.all([ getTripData(), getDestinationData() ])
+    const rand = Math.floor(Math.random() * 50) + 1
+
+    Promise.all([ getSingleTraveler(rand), fetchTripData(), fetchDestinationData() ])
     .then(values => {
-      this.setState({ allTrips: values[0].trips })
-      this.setState({ allDestinations: values[1].destinations })
+      this.setState({ currentTraveler: values[0] })
+      this.setState({ allTrips: values[1].trips })
+      this.setState({ allDestinations: values[2].destinations })
     })
+    .then(() => this.matchDestinations())
     .then(() => this.getTravelerTrips())
     .catch(error => console.log(error))
   }
 
-  getTravelerTrips = () => {
-    const filteredTrips = this.state.allTrips.filter(trip => {
-      return trip.userID === this.state.currentTraveler.id
-    })
-
-    this.matchDestinations(filteredTrips)
-  }
-
-  matchDestinations = (filteredTrips) => {
-    const matchedDestinations = filteredTrips.map(trip => {
+  matchDestinations = () => {
+    const matchedDestinations = this.state.allTrips.map(trip => {
       const matchedDestination = this.state.allDestinations.find(dest => {
         return dest.id === trip.destinationID
       })
@@ -46,18 +43,38 @@ class App extends Component {
       return trip
     })
 
-    this.setState({ travelerTrips: matchedDestinations })
+    this.setState({ allTrips: matchedDestinations })
+  }
+
+  getTravelerTrips = () => {
+    const filteredTrips = this.state.allTrips.filter(trip => {
+      return trip.userID === this.state.currentTraveler.id
+    })
+
+    this.setState({ travelerTrips: filteredTrips })
+  }
+
+  addTrip = (trip) => {
+    postTrip(trip)
+    .then(data => this.setState({ allTrips: [data.newResource, ...this.state.allTrips] }))
+    .then(() => this.matchDestinations())
+    .then(() => this.getTravelerTrips())
+    .catch(error => console.log(error))
   }
 
   render() {
     return (
       <>
-        <Header name={this.state.currentTraveler.name} />
+        {this.state.currentTraveler?.name && <Header name={this.state.currentTraveler.name} />}
         <main>
           <aside className="sidebar">
-            <img className="icon" src="../../images/undraw_travel_mode_7sf4.svg" alt="woman traveling with a suitcase" />
-            <Form />
-            <Stats />
+            <img className="icon" src={icon} alt="woman traveling with a suitcase" />
+            <Form
+              currentTraveler={this.state.currentTraveler}
+              allTrips={this.state.allTrips}
+              allDestinations={this.state.allDestinations}
+              addTrip={this.addTrip}
+            />
           </aside>
           <Trips travelerTrips={this.state.travelerTrips} />
         </main>
