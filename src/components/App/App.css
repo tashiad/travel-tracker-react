@@ -52,11 +52,6 @@ main {
   transition: .5s ease;
 }
 
-/* .error-message {
-  color: red;
-  font-style: italic;
-} */
-
 @media screen and (max-width: 1400px) {
   body {
     margin: 0 0 15% 0;

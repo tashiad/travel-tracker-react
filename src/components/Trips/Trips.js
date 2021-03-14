@@ -1,8 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './Trips.css'
 import Trip from '../Trip/Trip'
 
-const Trips = ({ travelerTrips, removeTrip }) => {
+const Trips = ({ travelerTrips, removeTrip, error, isLoading }) => {
   const sortedTrips = travelerTrips.sort((a, b) => {
     return new Date(b.date) - new Date(a.date)
   })
@@ -28,11 +29,19 @@ const Trips = ({ travelerTrips, removeTrip }) => {
   return (
     <section className="all-trips">
       <h2>Your Trips</h2>
+      {error && <p>{error}</p>}
       <section className="card-grid">
-        { tripCards }
+        {isLoading ? <h3>Loading...</h3> : tripCards}
       </section>
     </section>
   )
+}
+
+Trips.propTypes = {
+  travelerTrips: PropTypes.array,
+  removeTrip: PropTypes.func,
+  error: PropTypes.string,
+  isLoading: PropTypes.bool
 }
 
 export default Trips

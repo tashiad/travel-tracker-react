@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import './Form.css'
 
 class Form extends Component {
@@ -100,6 +101,7 @@ class Form extends Component {
         <form className="trip-form">
           <label htmlFor="date">Start Date:</label>
           <input
+            id="date"
             type="date"
             name="date"
             value={this.state.date}
@@ -109,6 +111,7 @@ class Form extends Component {
 
           <label htmlFor="duration">Number of Days:</label>
           <input
+            id="duration"
             type="number"
             name="duration"
             value={this.state.duration}
@@ -120,6 +123,7 @@ class Form extends Component {
 
           <label htmlFor="travelers">Number of Travelers:</label>
           <input
+            id="travelers"
             type="number"
             name="travelers"
             value={this.state.travelers}
@@ -131,6 +135,7 @@ class Form extends Component {
 
           <label htmlFor="destination">Destination:</label>
           <select
+            id="destination"
             className="trip-destination"
             name="destination"
             value={this.state.destination}
@@ -183,6 +188,13 @@ class Form extends Component {
       </>
     )
   }
+}
+
+Form.propTypes = {
+  currentTraveler: PropTypes.object,
+  allTrips: PropTypes.array,
+  allDestinations: PropTypes.array,
+  addTrip: PropTypes.func
 }
 
 export default Form

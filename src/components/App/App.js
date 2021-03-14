@@ -15,12 +15,16 @@ class App extends Component {
       currentTraveler: {},
       allTrips: [],
       allDestinations: [],
-      travelerTrips: []
+      travelerTrips: [],
+      error: '',
+      isLoading: false
     }
   }
 
   componentDidMount() {
     const rand = Math.floor(Math.random() * 50) + 1
+
+    this.setState({ isLoading: true })
 
     Promise.all([ getSingleTraveler(rand), fetchTripData(), fetchDestinationData() ])
     .then(values => {
@@ -30,7 +34,8 @@ class App extends Component {
     })
     .then(() => this.matchDestinations())
     .then(() => this.getTravelerTrips())
-    .catch(error => console.log(error))
+    .catch(error => this.setState({ error: 'Unable to load trips. Please refresh the page or try again later.' }))
+    .finally(() => this.setState({ isLoading: false }))
   }
 
   matchDestinations = () => {
@@ -60,7 +65,7 @@ class App extends Component {
     .then(data => this.setState({ allTrips: [data.newResource, ...this.state.allTrips] }))
     .then(() => this.matchDestinations())
     .then(() => this.getTravelerTrips())
-    .catch(error => console.log(error))
+    .catch(error => this.setState({ error: 'Something went wrong. Please refresh the page or try again later.' }))
   }
 
   removeTrip = (id) => {
@@ -76,7 +81,8 @@ class App extends Component {
   render() {
     return (
       <>
-        {this.state.currentTraveler?.name && <Header name={this.state.currentTraveler.name} />}
+        <Header name={this.state.currentTraveler.name} />
+
         <main>
           <aside className="sidebar">
             <img className="icon" src={icon} alt="woman traveling with a suitcase" />
@@ -90,6 +96,8 @@ class App extends Component {
           <Trips
             travelerTrips={this.state.travelerTrips}
             removeTrip={this.removeTrip}
+            error={this.state.error}
+            isLoading={this.state.isLoading}
           />
         </main>
       </>
