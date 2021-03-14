@@ -57,6 +57,14 @@ describe('Travel Tracker Homepage', () => {
       .get('form select[name=destination]').select('Amsterdam, Netherlands').should('have.value', 'Amsterdam, Netherlands')
   })
 
+  it('Should not be able to submit the form unless all fields have been filled out', () => {
+    cy
+      .get('form input[name=date]').type('2021-05-10')
+      .get('form input[name=travelers]').type('2')
+      .get('form select[name=destination]').select('Amsterdam, Netherlands')
+      .get('.button-quote').should('be.disabled')
+  })
+
   it('Should be able to quote a trip', () => {
     cy
       .get('form input[name=date]').type('2021-05-10').should('have.value', '2021-05-10')
@@ -95,16 +103,9 @@ describe('Travel Tracker Homepage', () => {
       .get('.card').should('contain', 'Start Date: 05/10/2021')
   })
 
-  it.skip('Should not be able to submit the form unless all fields have been filled out', () => {
-    cy.get('form input[name=title]').type('Test 3').should('have.value', 'Test 3')
-    cy.get('form input[name=long_url]')
-    cy.get('button[name="submit"]').should('be.disabled')
-  })
-
-  it.skip('Should be able to delete a URL', () => {
-    cy.intercept('DELETE', 'http://localhost:3001/api/v1/urls/4', {statusCode: 204})
-    cy.get('.delete-button').eq(1).click()
-    cy.get('.url').eq(1).should('not.exist')
+  it('Should be able to cancel a trip', () => {
+    cy.get('.button-remove').click()
+    cy.get('.card').should('not.exist')
   })
 
 })
