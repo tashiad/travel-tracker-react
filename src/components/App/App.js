@@ -56,7 +56,9 @@ class App extends Component {
 
   addTrip = (trip) => {
     postTrip(trip)
-    .then(() => this.getTrips())
+    .then(data => this.setState({ allTrips: [data.newResource, ...this.state.allTrips] }))
+    .then(() => this.matchDestinations())
+    .then(() => this.getTravelerTrips())
     .catch(error => console.log(error))
   }
 

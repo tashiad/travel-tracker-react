@@ -52,10 +52,6 @@ class Form extends Component {
     this.setState({ quote: formatted })
   }
 
-  clearInputs = () => {
-    this.setState({ date: '', travelers: '', duration: '', destination: '' })
-  }
-
   findDestination = () => {
     return this.props.allDestinations.find(location => {
       return location.destination === this.state.destination
@@ -80,8 +76,13 @@ class Form extends Component {
       suggestedActivities: []
     }
 
+    this.setState({ added: true })
     this.props.addTrip(formattedTrip)
     this.clearInputs()
+  }
+
+  clearInputs = () => {
+    this.setState({ date: '', travelers: '', duration: '', destination: '', quote: '', added: false })
   }
 
   render() {
