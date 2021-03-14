@@ -18,6 +18,8 @@
 
 .card h3 {
   height: 12%;
+  font-size: 1.2em;
+  margin: 3% 0 5% 0;
 }
 
 .button-remove {
