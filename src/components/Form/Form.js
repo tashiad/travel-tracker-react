@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import './Form.css'
 
 class Form extends Component {
@@ -183,6 +184,13 @@ class Form extends Component {
       </>
     )
   }
+}
+
+Form.propTypes = {
+  currentTraveler: PropTypes.object,
+  allTrips: PropTypes.array,
+  allDestinations: PropTypes.array,
+  addTrip: PropTypes.func
 }
 
 export default Form
