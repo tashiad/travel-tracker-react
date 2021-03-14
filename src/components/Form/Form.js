@@ -124,13 +124,14 @@ class Form extends Component {
 
           <label htmlFor="destination">Destination:</label>
           <select
+            className="trip-destination"
             name="destination"
             value={this.state.destination}
             onChange={this.handleChange}
             required
           >
-          <option value="" disabled>Select a destination</option>
-          {this.populateDestinations()}
+            <option value="" disabled>Select a destination</option>
+            {this.populateDestinations()}
           </select>
 
           {!this.checkDateInput() || !this.state.travelers || !this.state.duration || !this.state.destination ?

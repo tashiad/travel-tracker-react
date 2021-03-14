@@ -9,7 +9,7 @@ label {
 }
 
 input,
-#trip-destination {
+.trip-destination {
   height: 30px;
 }
 
