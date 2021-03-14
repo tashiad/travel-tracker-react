@@ -3,7 +3,7 @@ import rand from '../../src/random-number'
 describe('Travel Tracker Homepage', () => {
 
   beforeEach(() => {
-    cy
+    cy // unable to get this to stub correctly (fixture data isn't coming in). may be easier once login form has been created.
       .fixture('travelers')
       .then(data => {
         cy.intercept('GET', `https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers/${rand}`, { body: data })
@@ -30,20 +30,43 @@ describe('Travel Tracker Homepage', () => {
       .get('h2').should('contain', 'Welcome')
   })
 
-  it.skip('Should display existing shortened urls on load', () => {
-    cy.get('.url').eq(0).should('contain', 'Test 1')
-    cy.get('.url').eq(1).should('contain', 'Test 2')
+  it('Should display existing user trips on load', () => {
+    cy
+      .get('.card').should('contain', 'TestDest')
+      .get('.card').get('img')
+      .get('.card').should('contain', 'Travelers')
+      .get('.card').should('contain', 'Start Date')
+      .get('.card').should('contain', 'Duration')
+      .get('.card').should('contain', 'Lodging')
+      .get('.card').should('contain', 'Flights')
+      .get('.card').should('contain', 'Total Trip Cost')
   })
 
-  it.skip('Should display the urls form on load', () => {
-    cy.get('form input[name=title]')
-    cy.get('form input[name=long_url]')
-    cy.get('form').contains('button', 'Shorten Please!')
+  it('Should display the form correctly', () => {
+    cy
+      .get('form input[name=date]')
+      .get('form input[name=duration]')
+      .get('form input[name=travelers]')
+      .get('form select[name=destination]')
+      .get('form').contains('button', 'Get a Quote')
   })
 
-  it.skip('Should be able to fill out the form', () => {
-    cy.get('form input[name=title]').type('Test 3').should('have.value', 'Test 3')
-    cy.get('form input[name=long_url]').type(longUrl).should('have.value', longUrl)
+  it('Should be able to fill out the form', () => {
+    cy
+      .get('form input[name=date]').type('2021-05-10').should('have.value', '2021-05-10')
+      .get('form input[name=duration]').type('10').should('have.value', '10')
+      .get('form input[name=travelers]').type('2').should('have.value', '2')
+      .get('form select[name=destination]').select('TestDest Tokyo, Japan').should('have.value', 'TestDest Tokyo, Japan')
+  })
+
+  it('Should be able to quote a trip', () => {
+    cy
+      .get('form input[name=date]').type('2021-05-10').should('have.value', '2021-05-10')
+      .get('form input[name=duration]').type('10').should('have.value', '10')
+      .get('form input[name=travelers]').type('2').should('have.value', '2')
+      .get('form select[name=destination]').select('TestDest Tokyo, Japan').should('have.value', 'TestDest Tokyo, Japan')
+      .get('form').contains('button', 'Get a Quote').click()
+      .get('p').should('contain', 'Estimated trip cost: $3,250.00')
   })
 
   it.skip('Should be able to add a new shortened URL', () => {
