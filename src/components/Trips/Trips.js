@@ -27,9 +27,6 @@ const Trips = ({ travelerTrips }) => {
   return (
     <section className="all-trips">
       <h2>Your Trips</h2>
-      <button type="button" name="button" className="button button-filter" id="no-trip-filters">All Trips</button>
-      <button type="button" name="button" className="button button-filter" id="approved-trips">Upcoming Trips</button>
-      <button type="button" name="button" className="button button-filter" id="pending-trips">Past Trips</button>
       <section className="card-grid">
         { tripCards }
       </section>

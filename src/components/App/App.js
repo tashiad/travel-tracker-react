@@ -4,13 +4,14 @@ import icon from '../../images/undraw_travel_mode_7sf4.svg'
 import Header from '../Header/Header'
 import Form from '../Form/Form'
 import Trips from '../Trips/Trips'
-import { fetchTripData, fetchDestinationData, postTrip } from '../../apiCalls'
+import { getSingleTraveler, fetchTripData, fetchDestinationData, postTrip } from '../../apiCalls'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      currentTraveler: { id: 7, name: 'Emmet Sandham', travelerType: 'relaxer' },
+      // TO DO: with more time, I'd create a login form to bring in different users from the travelers endpoint
+      currentTraveler: {},
       allTrips: [],
       allDestinations: [],
       travelerTrips: []
@@ -18,14 +19,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getTrips()
-  }
+    const rand = Math.floor(Math.random() * 50) + 1
 
-  getTrips = () => {
-    Promise.all([ fetchTripData(), fetchDestinationData() ])
+    Promise.all([ getSingleTraveler(rand), fetchTripData(), fetchDestinationData() ])
     .then(values => {
-      this.setState({ allTrips: values[0].trips })
-      this.setState({ allDestinations: values[1].destinations })
+      this.setState({ currentTraveler: values[0] })
+      this.setState({ allTrips: values[1].trips })
+      this.setState({ allDestinations: values[2].destinations })
     })
     .then(() => this.matchDestinations())
     .then(() => this.getTravelerTrips())
@@ -63,7 +63,7 @@ class App extends Component {
   render() {
     return (
       <>
-        <Header name={this.state.currentTraveler.name} />
+        {this.state.currentTraveler?.name && <Header name={this.state.currentTraveler.name} />}
         <main>
           <aside className="sidebar">
             <img className="icon" src={icon} alt="woman traveling with a suitcase" />

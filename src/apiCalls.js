@@ -1,15 +1,8 @@
-// const tripErrorMessage = document.querySelector('#trip-error-message')
+export const getSingleTraveler = (travelerId) => {
+  return fetch(`https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers/${travelerId}`)
+    .then(response => response.json())
+}
 
-// export const getTravelerData = () => {
-//   return fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers')
-//     .then(response => response.json())
-// }
-//
-// export const getSingleTraveler = (travelerId) => {
-//   return fetch(`http://localhost:3001/api/v1/travelers/${travelerId}`)
-//     .then(response => response.json())
-// }
-//
 export const fetchTripData = () => {
   return fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips')
     .then(response => response.json())

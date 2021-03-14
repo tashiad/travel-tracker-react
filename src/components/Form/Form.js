@@ -9,7 +9,8 @@ class Form extends Component {
       travelers: '',
       duration: '',
       destination: '',
-      quote: ''
+      quote: '',
+      added: false
     }
   }
 
@@ -132,10 +133,7 @@ class Form extends Component {
           {this.state.quote &&
             <button type="button" className="button button-submit" id="button-submit" onClick={this.createTrip}>Add Trip</button>
           }
-
-          <p className="error-message" id="trip-error-message"></p>
-
-          <p className="hidden" id="trip-request-message"><em>Trip added. Bon voyage!</em></p>
+          {this.state.added && <p className="hidden" id="trip-request-message"><em>Trip added. Bon voyage!</em></p>}
         </form>
       </>
     )
