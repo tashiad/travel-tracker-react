@@ -15,12 +15,16 @@ class App extends Component {
       currentTraveler: {},
       allTrips: [],
       allDestinations: [],
-      travelerTrips: []
+      travelerTrips: [],
+      error: '',
+      isLoading: false
     }
   }
 
   componentDidMount() {
     const rand = Math.floor(Math.random() * 50) + 1
+
+    this.setState({ isLoading: true })
 
     Promise.all([ getSingleTraveler(rand), fetchTripData(), fetchDestinationData() ])
     .then(values => {
@@ -31,6 +35,7 @@ class App extends Component {
     .then(() => this.matchDestinations())
     .then(() => this.getTravelerTrips())
     .catch(error => console.log(error))
+    .finally(() => this.setState({ isLoading: false }))
   }
 
   matchDestinations = () => {
@@ -90,6 +95,7 @@ class App extends Component {
           <Trips
             travelerTrips={this.state.travelerTrips}
             removeTrip={this.removeTrip}
+            isLoading={this.state.isLoading}
           />
         </main>
       </>
