@@ -2,7 +2,7 @@ import React from 'react'
 import './Trips.css'
 import Trip from '../Trip/Trip'
 
-const Trips = ({ travelerTrips, removeTrip, isLoading }) => {
+const Trips = ({ travelerTrips, removeTrip, error, isLoading }) => {
   const sortedTrips = travelerTrips.sort((a, b) => {
     return new Date(b.date) - new Date(a.date)
   })
@@ -28,6 +28,7 @@ const Trips = ({ travelerTrips, removeTrip, isLoading }) => {
   return (
     <section className="all-trips">
       <h2>Your Trips</h2>
+      {error && <p>{error}</p>}
       <section className="card-grid">
         {isLoading ? <h3>Loading...</h3> : tripCards}
       </section>
