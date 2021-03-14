@@ -135,15 +135,15 @@ class Form extends Component {
           </select>
 
           {!this.checkDateInput() || !this.state.travelers || !this.state.duration || !this.state.destination ?
-            <button type="button" name="button" className="button button-quote disabled" disabled>Get a Quote</button>
+            <button type="button" name="button" className="button button-form button-quote disabled" disabled>Get a Quote</button>
             :
-            <button type="button" name="button" className="button button-quote" onClick={this.getQuote}>Get a Quote</button>
+            <button type="button" name="button" className="button button-form button-quote" onClick={this.getQuote}>Get a Quote</button>
           }
-          {this.state.quote && <p id="trip-cost"><strong>Estimated trip cost:</strong> ${this.state.quote}</p>}
+          {this.state.quote && <p><strong>Estimated trip cost:</strong> ${this.state.quote}</p>}
           {this.state.quote &&
-            <button type="button" className="button button-submit" id="button-submit" onClick={this.createTrip}>Add Trip</button>
+            <button type="button" className="button button-form button-submit" onClick={this.createTrip}>Add Trip</button>
           }
-          {this.state.added && <p id="trip-request-message"><em>Trip added. Bon voyage!</em></p>}
+          {this.state.added && <p className="trip-request-message"><em>Trip added. Bon voyage!</em></p>}
         </form>
       </>
     )

@@ -13,40 +13,26 @@ input,
   height: 30px;
 }
 
-.button-quote {
+.button-form {
   border: none;
-  background-color: #585A89;
   border-radius: 2px;
   font-size: 1em;
   font-weight: bold;
   color: white;
+}
+
+.button-quote {
+  background-color: #585A89;
 }
 
 .button-submit {
-  border: none;
-  background-color: #585A89;
-  border-radius: 2px;
-  font-size: 1em;
-  font-weight: bold;
-  color: white;
   background-color: #00B0FE;
 }
 
-#trip-request-message {
+.trip-request-message {
   margin-bottom: 10%;
 }
 
 .disabled {
   cursor: not-allowed;
-}
-
-@media screen and (max-width: 425px) {
-  .sign-in-form {
-    flex-direction: column;
-    margin-bottom: 5%;
-  }
-
-  .button-signin {
-    height: 30px;
-  }
 }
