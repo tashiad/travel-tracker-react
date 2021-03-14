@@ -29,7 +29,7 @@ const Trips = ({ travelerTrips, removeTrip, isLoading }) => {
     <section className="all-trips">
       <h2>Your Trips</h2>
       <section className="card-grid">
-        { isLoading ? <h3>Loading...</h3> : tripCards }
+        {isLoading ? <h3>Loading...</h3> : tripCards}
       </section>
     </section>
   )

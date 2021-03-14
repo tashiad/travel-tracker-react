@@ -81,7 +81,8 @@ class App extends Component {
   render() {
     return (
       <>
-        {this.state.currentTraveler?.name && <Header name={this.state.currentTraveler.name} />}
+        <Header name={this.state.currentTraveler.name} />
+
         <main>
           <aside className="sidebar">
             <img className="icon" src={icon} alt="woman traveling with a suitcase" />
