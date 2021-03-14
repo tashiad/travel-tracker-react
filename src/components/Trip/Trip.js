@@ -22,7 +22,7 @@ const Trip = ({ id, date, duration, travelers, destination, alt, image, flights,
 
   return (
     <article className="card">
-      <button onClick={() => removeTrip(id)}>X</button>
+      <button className="button-remove" onClick={() => removeTrip(id)}>X</button>
       <h3 className="card-destination">{destination}</h3>
       <img className="card-image" src={image} alt={alt} />
       <p className="card-travelers"><strong>Travelers:</strong> {travelers}</p>
