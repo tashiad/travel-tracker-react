@@ -30,6 +30,13 @@ class Form extends Component {
     })
   }
 
+  checkDateInput = () => {
+    const currentDate = new Date()
+    const inputDate = new Date(this.state.date.trim())
+
+    return (this.state.date === '') || (inputDate < currentDate) ? false : true
+  }
+
   formatCost = (number) => {
     const formatted = number.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     return formatted
@@ -124,7 +131,7 @@ class Form extends Component {
           {this.populateDestinations()}
           </select>
 
-          {!this.state.date || !this.state.travelers || !this.state.duration || !this.state.destination ?
+          {!this.checkDateInput() || !this.state.travelers || !this.state.duration || !this.state.destination ?
             <button type="button" name="button" className="button button-quote disabled" disabled>Get a Quote</button>
             :
             <button type="button" name="button" className="button button-quote" onClick={this.getQuote}>Get a Quote</button>
