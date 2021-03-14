@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './Header.css'
 
 const Header = ({ name }) => {
@@ -13,6 +14,10 @@ const Header = ({ name }) => {
       {!name ? <h2>Welcome!</h2> : <h2>Welcome, {getFirstName()}</h2>}
     </header>
   )
+}
+
+Header.propTypes = {
+  name: PropTypes.string
 }
 
 export default Header
