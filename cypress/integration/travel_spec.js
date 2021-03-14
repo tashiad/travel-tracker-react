@@ -1,13 +1,11 @@
-import rand from '../../src/random-number'
-
 describe('Travel Tracker Homepage', () => {
 
   beforeEach(() => {
-    cy // unable to get this to stub correctly (fixture data isn't coming in). may be easier once login form has been created.
-      .fixture('travelers')
-      .then(data => {
-        cy.intercept('GET', `https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers/${rand}`, { body: data })
-      })
+    // cy // unable to get this to stub correctly (fixture data isn't coming in). may be easier once login form has been created.
+    //   .fixture('travelers')
+    //   .then(data => {
+    //     cy.intercept('GET', `https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers/${id}`, { body: data })
+    //   })
 
     cy
       .fixture('trips')
@@ -27,12 +25,12 @@ describe('Travel Tracker Homepage', () => {
   it('Should display the correct header on load', () => {
     cy
       .get('h1').should('have.text', ' COVID\'s Over Travel Tracker')
-      .get('h2').should('contain', 'Welcome')
+      .get('h2').should('contain', 'Welcome, Ham')
   })
 
   it('Should display existing user trips on load', () => {
     cy
-      .get('.card').should('contain', 'TestDest')
+      .get('.card').should('contain', 'San Juan')
       .get('.card').get('img')
       .get('.card').should('contain', 'Travelers')
       .get('.card').should('contain', 'Start Date')
@@ -56,7 +54,7 @@ describe('Travel Tracker Homepage', () => {
       .get('form input[name=date]').type('2021-05-10').should('have.value', '2021-05-10')
       .get('form input[name=duration]').type('10').should('have.value', '10')
       .get('form input[name=travelers]').type('2').should('have.value', '2')
-      .get('form select[name=destination]').select('TestDest Tokyo, Japan').should('have.value', 'TestDest Tokyo, Japan')
+      .get('form select[name=destination]').select('Amsterdam, Netherlands').should('have.value', 'Amsterdam, Netherlands')
   })
 
   it('Should be able to quote a trip', () => {
@@ -64,25 +62,37 @@ describe('Travel Tracker Homepage', () => {
       .get('form input[name=date]').type('2021-05-10').should('have.value', '2021-05-10')
       .get('form input[name=duration]').type('10').should('have.value', '10')
       .get('form input[name=travelers]').type('2').should('have.value', '2')
-      .get('form select[name=destination]').select('TestDest Tokyo, Japan').should('have.value', 'TestDest Tokyo, Japan')
+      .get('form select[name=destination]').select('Amsterdam, Netherlands').should('have.value', 'Amsterdam, Netherlands')
       .get('form').contains('button', 'Get a Quote').click()
-      .get('p').should('contain', 'Estimated trip cost: $3,250.00')
+      .get('p').should('contain', 'Estimated trip cost: $2,900.00')
   })
 
-  it.skip('Should be able to add a new shortened URL', () => {
-    cy.intercept('POST', 'http://localhost:3001/api/v1/urls', {
-        statusCode: 200,
-        body: {
-          "id": 3,
-          "long_url": longUrl,
-          "short_url": "http://localhost:3001/useshorturl/4",
-          "title": "Test 3",
-        }
-      })
-    cy.get('form input[name=title]').type('Test 3').should('have.value', 'Test 3')
-    cy.get('form input[name=long_url]').type(longUrl).should('have.value', longUrl)
-    cy.get('button[name="submit"]').click()
-    cy.get('.url').contains('Test 3')
+  it('Should be able to add a new trip', () => {
+
+    // TO DO: unable to get this intercept to work
+    // cy.intercept('POST', 'https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips', {
+    //     statusCode: 200,
+    //     body: {
+    //       "id": Date.now(),
+    //       "userID": 1,
+    //       "destinationID": 9,
+    //       "travelers": 2,
+    //       "date": "2021/05/10",
+    //       "duration": 10,
+    //       "status": "approved",
+    //       "suggestedActivities": []
+    //     }
+    //   })
+
+    cy
+      .get('form input[name=date]').type('2021-05-10')
+      .get('form input[name=duration]').type('10')
+      .get('form input[name=travelers]').type('2')
+      .get('form select[name=destination]').select('Amsterdam, Netherlands')
+      .get('form').contains('button', 'Get a Quote').click()
+      .get('.button-submit').click()
+      .get('.card').should('contain', 'Amsterdam, Netherlands')
+      .get('.card').should('contain', 'Start Date: 05/10/2021')
   })
 
   it.skip('Should not be able to submit the form unless all fields have been filled out', () => {
